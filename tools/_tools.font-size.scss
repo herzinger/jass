@@ -1,0 +1,60 @@
+@use 'sass:math';
+
+@use '../settings'         as settings;
+@use 'tools.get-font-size' as *;
+@use 'tools.important'     as *;
+
+
+///* ========================================================================
+//   #FONT-SIZE
+//   ======================================================================== */
+
+// Generates a rem font-size (with pixel fallback) and a baseline-compatible
+// unitless line-height from a pixel font-size value. Basic usage is simply:
+//
+//   @include inuit-font-size(18px);
+//
+// You can force a specific line-height by passing it as the second argument:
+//
+//   @include inuit-font-size(16px, 1);
+//
+// You can also modify the line-height by increments, while staying in the
+// baseline grid, by setting the `$modifier` parameter. It takes a positive
+// or negative integer, and it will add or remove "lines" to the  generated
+// line-height. This is the recommended way to do it, unless you really need
+// an absolute value. i.e.:
+//
+//   // add 2 lines:
+//   @include inuit-font-size(16px, $modifier: +2);
+//
+//   // subtract 1 line:
+//   @include inuit-font-size(16px, $modifier: -1);
+
+@mixin font-size(
+  $size:        default,
+  $line-height: auto,
+  $modifier:    0,
+  $force:       false
+) {
+  $important:    important($force);
+  $px-font-size: get-font-size($size);
+
+  font-size:     math.div($px-font-size, settings.$global-font-size) * 1rem $important;
+
+  @if ($line-height == 'auto') {
+    // Define how many grid lines each text line should span.
+    // By default, we set it to the minimum number of lines necessary
+    // in order to contain the defined font-size, +1 for some breathing room.
+    // This can be modified with the `$modifier` parameter.
+    $lines:          math.ceil(math.div($px-font-size, settings.$baseline)) + 1 + $modifier;
+    $px-line-height: $lines * settings.$baseline;
+
+    line-height:     math.div($px-line-height, $px-font-size) $important;
+
+  } @else if (type-of($line-height) == number or $line-height == 'inherit' or $line-height == 'normal') {
+
+    line-height:     $line-height $important;
+
+  }
+
+}

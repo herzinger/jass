@@ -1,0 +1,39 @@
+@use 'sass:selector';
+@use 'sass:list';
+
+@use '../settings' as settings;
+@use '../tools'    as tools;
+
+
+$_PROPERTIES:   (padding, margin);
+$_ORIENTATIONS: (block, inline);
+$_POSITIONS:    (start, end);
+$_SIZES:        list.append(settings.$spacing-labels, none);
+
+
+@mixin _spacing-size($property, $size: default) {
+  #{ tools.if($size == default, '&', '&-#{ $size }') } {
+    #{ $property }: tools.get-spacing($size) !important;
+  }
+}
+
+@each $property in $_PROPERTIES {
+
+  @each $size in $_SIZES {
+    .u-#{ $property } {
+      @include _spacing-size($property, $size);
+
+      @each $orientation in $_ORIENTATIONS {
+        &-#{ $orientation } {
+          @include _spacing-size(#{ $property }-#{ $orientation }, $size);
+
+          @each $position in $_POSITIONS {
+            &-#{ $position } {
+              @include _spacing-size(#{ $property }-#{ $orientation }-#{ $position }, $size)
+            }
+          }
+        }
+      }
+    }
+  }
+}

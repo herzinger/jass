@@ -1,0 +1,7 @@
+@function if($condition, $if-true, $if-false) {
+  @if ($condition) {
+    @return $if-true;
+  }
+
+  @return $if-false;
+}

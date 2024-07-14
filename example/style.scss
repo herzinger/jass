@@ -1,0 +1,51 @@
+@use '../settings' as settings;
+@use '../tools'    as tools;
+
+
+html {
+  font-size: settings.$global-font-size;
+}
+
+
+body {
+  @include tools.font-size();
+
+  margin:  0;
+  padding: 0;
+}
+
+
+main, footer {
+  max-width:     1200px;
+  margin-inline: auto;
+  padding:       tools.get-spacing(large) tools.get-spacing();
+}
+
+
+header, footer {
+  text-align: center;
+}
+
+
+section {
+  margin-block-end: tools.get-spacing(large);
+}
+
+
+h1         { margin-block: 0 tools.get-spacing(large); }
+h1, h2, h3 { text-transform: uppercase; }
+h2, h3     { margin-block: 0 tools.get-spacing(); }
+
+p { margin-block-end: tools.get-spacing(); }
+
+.u-type-banner { margin-block-end: tools.get-spacing(huge); }
+
+
+@each $label in settings.$type-labels {
+  .u-type-#{ $label } {
+    @include tools.font-size($label);
+  }
+}
+
+
+@import '../utilities';

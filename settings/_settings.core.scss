@@ -1,0 +1,13 @@
+@use 'sass:list';
+
+// Default constants
+$_DEFAULT-SPACING-SCALE:  (1, 2, 3, 5, 8, 13);
+$_DEFAULT-SPACING-LABELS: (tiny, small, default, large, huge, giant);
+
+$baseline:                6px !default;
+$spacing-scale:           $_DEFAULT-SPACING-SCALE !default;
+$spacing-labels:          $_DEFAULT-SPACING-LABELS !default;
+
+@if (list.length($spacing-scale) != list.length($spacing-labels)) {
+  @error 'the `$spacing-labels` and `$spacing-scale` options must have the same length.'
+}

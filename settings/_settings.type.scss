@@ -1,0 +1,14 @@
+@use 'sass:math';
+@use 'sass:list';
+
+// Default constants
+$_DEFAULT-TYPE-SCALE:  (.75, .875, 1, 2, 3, 5, 8);
+$_DEFAULT-TYPE-LABELS: (tiny, small, default, subheading, heading, title, banner);
+
+$global-font-size:     16px !default;
+$type-scale:           $_DEFAULT-TYPE-SCALE !default;
+$type-labels:          $_DEFAULT-TYPE-LABELS !default;
+
+@if (list.length($type-scale) != list.length($type-labels)) {
+  @error 'the `$type-labels` and `$type-scale` options must have the same length.'
+}

@@ -1,0 +1,6 @@
+@function important($is-important) {
+  @if ($is-important == true)  { @return !important; }
+  @if ($is-important == false) { @return null; }
+
+  @error '`#{ $is-important }` needs to be `true` or `false`.';
+}
