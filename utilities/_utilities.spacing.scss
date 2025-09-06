@@ -5,29 +5,24 @@
 @use '../tools'    as tools;
 
 
-$_PROPERTIES:   (padding, margin);
-$_ORIENTATIONS: (block, inline);
-$_POSITIONS:    (start, end);
-$_SIZES:        list.append(settings.$spacing-labels, none);
-
-
-@mixin _spacing-size($property, $size: default) {
-  #{ tools.if($size == default, '&', '&-#{ $size }') } {
-    #{ $property }: tools.get-spacing($size) !important;
+@mixin _spacing-size($property, $label: default) {
+  #{ tools.if($label == default, '&', '&-#{ $label }') } {
+    #{ $property }: var(--spacing-#{ $label });
   }
 }
 
-@each $property in $_PROPERTIES {
 
-  @each $size in $_SIZES {
-    .u-#{ $property } {
+@each $property, $property-label in settings.$spacing-properties {
+
+  @each $size in settings.$spacing-sizes {
+    .u-#{ $property-label } {
       @include _spacing-size($property, $size);
 
-      @each $orientation in $_ORIENTATIONS {
-        &-#{ $orientation } {
+      @each $orientation, $orientation-label in settings.$spacing-orientations {
+        &#{ $orientation-label } {
           @include _spacing-size(#{ $property }-#{ $orientation }, $size);
 
-          @each $position in $_POSITIONS {
+          @each $position in settings.$spacing-positions {
             &-#{ $position } {
               @include _spacing-size(#{ $property }-#{ $orientation }-#{ $position }, $size)
             }

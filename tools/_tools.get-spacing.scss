@@ -2,16 +2,17 @@
 @use 'sass:list';
 
 @use '../settings' as settings;
+@use 'tools.get-label-index' as *;
 
 
 @function get-spacing($label: default) {
 
   @if ($label == none) { @return 0; }
 
-  $index:      list.index(settings.$spacing-labels, $label);
+  $index: get-label-index(settings.$spacing-labels, $label);
   $multiplier: list.nth(settings.$spacing-scale, $index);
 
-  @if($index == null) {
+  @if ($index == null) {
     @error 'the label `#{ $label }` is not set in the `$spacing-labels` option.'
   }
 

@@ -1,0 +1,9 @@
+@use '../settings' as settings;
+@use '../tools'    as tools;
+
+
+:root {
+  @each $label in settings.$spacing-labels {
+    --spacing-#{ $label }: #{ tools.get-spacing($label) };
+  }
+}
