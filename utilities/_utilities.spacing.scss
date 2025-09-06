@@ -7,7 +7,7 @@
 
 @mixin _spacing-size($property, $label: default) {
   #{ tools.if($label == default, '&', '&-#{ $label }') } {
-    #{ $property }: var(--spacing-#{ $label });
+    #{ $property }: tools.if($label == none, 0, var(--spacing-#{ $label }));
   }
 }
 
