@@ -1,0 +1,12 @@
+@use "sass:list";
+@use "sass:meta";
+
+
+@function get-label-index($labels-list, $label) {
+
+  @if (meta.type-of($labels-list) != list) {
+    @error 'the `$labels-list` parameter must be a list of labels.';
+  }
+
+  @return list.index($labels-list, $label);
+}

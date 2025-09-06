@@ -1,0 +1,9 @@
+@use '../settings' as settings;
+@use '../tools'    as tools;
+
+
+@each $label in settings.$type-labels {
+  .u-fs-#{ $label } {
+    @include tools.font-size($label);
+  }
+}

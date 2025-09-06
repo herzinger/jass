@@ -1,0 +1,27 @@
+@use 'sass:math';
+@use "sass:list";
+
+@use '../settings'           as settings;
+@use 'tools.get-font-size'   as *;
+@use 'tools.get-label-index' as *;
+
+
+// Define how many grid lines each text line should span.
+// By default, we set it to the minimum number of lines necessary
+// in order to contain the defined font-size, +1 for some breathing room.
+// This can be modified with the `$modifier` parameter.
+
+@function get-line-height(
+  $px-font-size: default,
+  $modifier: 0
+) {
+
+  @if (get-label-index(settings.$type-labels, $px-font-size) != null) {
+    $px-font-size: get-font-size($px-font-size, false);
+  }
+
+  $lines:          math.ceil(math.div($px-font-size, settings.$baseline)) + 1 + $modifier;
+  $px-line-height: $lines * settings.$baseline;
+
+  @return math.div($px-line-height, $px-font-size);
+}
