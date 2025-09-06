@@ -1,0 +1,12 @@
+@use '../settings' as settings;
+@use '../tools'    as tools;
+
+:root {
+  --px-baseline: #{ settings.$global-font-size };
+  --fs-global: #{ settings.$global-font-size };
+
+  @each $label in settings.$type-labels {
+    --fs-#{ $label }: #{ tools.get-font-size($label) };
+    --lh-#{ $label }: #{ tools.get-line-height($label) };
+  }
+}
