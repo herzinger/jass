@@ -15,8 +15,8 @@
 
   @if ($increment == 0) { @return $color; }
 
-  $_white: hsl(from #{ $color } h calc(s + #{ $increment * -1 }) 95%);
-  $_black: hsl(from #{ $color } h calc(s + #{ $increment * -1 }) 5%);
+  $_white: hsl(from #{ $color } h calc(s + #{ $increment * -.1 }) 95%);
+  $_black: hsl(from #{ $color } h calc(s + #{ $increment * -.1 }) 5%);
 
   @if ($increment > 0) {
     @return color-mix(in oklch, #{ $color }, #{ $_white } #{ $increment * 1% });

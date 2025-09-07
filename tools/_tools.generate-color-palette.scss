@@ -1,16 +1,17 @@
 @use "sass:map";
 @use "sass:math";
 
-@use '../settings'                as settings;
-@use 'tools.if'                   as *;
-@use 'tools.generate-color-shade' as *;
+@use '../settings'                   as settings;
+@use 'tools.if'                      as *;
+@use 'tools.generate-color-shade'    as *;
+@use 'tools.generate-contrast-color' as *;
 
 
 /// Generates a color palette map with shades and contrasts from a base color
 ///
 /// @param {Color} $color - Base color to generate palette from
 /// @param {Map} $shades [settings.$shades] - Map of aliases for some shade values to add to the palette
-/// @param {Number} $first-light-contrast [500] - Threshold value below which light contrasts are used
+/// @param {Number} $contrast-threshold [500] - Threshold value below which light contrasts are used
 ///
 /// @return {Map} Color palette map containing:
 ///   - Numeric shades (50-900)
@@ -25,7 +26,7 @@
 ///   // Returns palette with custom aliases and contrast threshold
 @function generate-color-palette(
   $color,
-  $first-light-contrast: 500,
+  $contrast-threshold: 500,
   $shades: settings.$shades,
 ) {
   $_palette: (
@@ -34,30 +35,24 @@
     200: generate-color-shade($color, 200),
     300: generate-color-shade($color, 300),
     400: generate-color-shade($color, 400),
-    500: generate-color-shade($color, 500),
+    500: $color,
     600: generate-color-shade($color, 600),
     700: generate-color-shade($color, 700),
     800: generate-color-shade($color, 800),
-    900: generate-color-shade($color, 900)
+    900: generate-color-shade($color, 900),
   );
 
   $_contrasts: ();
 
   @each $shade, $value in $_palette {
-    $_increment:      math.div((500 - $shade), 5);
-    $_white:          hsl(from #{ $color } h calc(s + #{ $_increment * -1 }) 95%);
-    $_black:          hsl(from #{ $color } h calc(s + #{ $_increment * -1 }) 5%);
-    $_light-contrast: color-mix(in oklch, #{ $color }, #{ $_white } 90%);
-    $_dark-contrast:  color-mix(in oklch, #{ $color }, #{ $_black } 90%);
-
     $_contrasts: map.merge($_contrasts, (
-      $shade: if($shade < $first-light-contrast, $_dark-contrast, $_light-contrast)
+      $shade: generate-contrast-color($color, $shade, $contrast-threshold)
     ));
   }
 
   @each $shade, $value in $shades {
     $_palette: map.merge($_palette, (
-      $shade: generate-color-shade($color, $value)
+      $shade: map.get($_palette, $value)
     ));
 
     $_contrasts: map.merge($_contrasts, (
@@ -65,7 +60,7 @@
     ));
   }
 
-  $_palette: map.merge($_palette, (contrast: $_contrasts));
+  $_palette: map.merge($_palette, (contrast: $_contrasts, contrast-threshold: $contrast-threshold));
 
   @return $_palette;
 }

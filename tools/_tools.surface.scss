@@ -1,0 +1,7 @@
+@use 'tools.get-color'    as *;
+@use 'tools.get-contrast' as *;
+
+@mixin surface($palette-name, $shade: default) {
+  background-color: get-color($palette-name, $shade);
+  color:            get-contrast($palette-name, $shade);
+}

@@ -1,6 +1,7 @@
 @use 'sass:map';
 
 @use '../settings' as settings;
+@use 'tools.if'    as *;
 
 
 /// Gets a color value from a specified palette and shade
@@ -28,7 +29,11 @@
   }
 
   @if (map.has-key(settings.$shades, $shade)) {
-    @return var(--clr-#{ $palette-name }-#{ $shade });
+    @return if(
+        $shade == default,
+        var(--clr-#{ $palette-name }),
+        var(--clr-#{ $palette-name }-#{ $shade })
+    );
   }
 
   @return map.get(settings.$palettes, $palette-name, $shade);

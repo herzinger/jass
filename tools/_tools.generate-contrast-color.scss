@@ -1,0 +1,31 @@
+@use 'sass:math';
+@use 'sass:map';
+
+
+/// Generates a contrast color based on a base color and shade value
+///
+/// @param {Color} $color - Base color to generate contrast for
+/// @param {Number} $shade [500] - Shade value to determine contrast level
+/// @param {Number} $contrast-threshold [500] - Threshold value below which dark contrast is used
+///
+/// @return {Color} Contrast color that provides readable text against the given shade
+///
+/// @example scss
+///   $contrast: generate-contrast-color(#ace);
+///   // Returns dark contrast color for light shade
+///
+///   $custom-contrast: generate-contrast-color(#ace, 700, 400);
+///   // Returns light contrast for dark shade with custom threshold
+@function generate-contrast-color(
+  $color,
+  $shade: 500,
+  $contrast-threshold: 500
+) {
+  $_increment: math.div((500 - $shade), 5);
+  $_white: hsl(from #{ $color } h calc(s + #{ $_increment * -.1 }) 90%);
+  $_black: hsl(from #{ $color } h calc(s + #{ $_increment * -.1 }) 10%);
+  $_light-contrast: color-mix(in oklch, #{ $color }, #{ $_white } 90%);
+  $_dark-contrast: color-mix(in oklch, #{ $color }, #{ $_black } 90%);
+
+  @return if($shade < $contrast-threshold, $_dark-contrast, $_light-contrast);
+}

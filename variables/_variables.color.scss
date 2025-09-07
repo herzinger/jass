@@ -6,9 +6,16 @@
 
 :root {
   @each $key in map.keys(settings.$palettes) {
+    $_contrast-threshold:     map.get(settings.$palettes, $key, contrast-threshold);
+
+    --clr-#{ $key }:          #{ tools.get-color($key, 500) };
+    --clr-#{ $key }-contrast: #{ tools.get-contrast($key, 500) };
+
     @each $shade, $value in settings.$shades {
-      --clr-#{ $key }-#{ $shade }:          #{ tools.get-color($key, $value) };
-      --clr-#{ $key }-#{ $shade }-contrast: #{ tools.get-contrast($key, $value) };
+      @if ($shade != default) {
+        --clr-#{ $key }-#{ $shade }:          #{ tools.generate-color-shade(var(--clr-#{ $key }), $value) };
+        --clr-#{ $key }-#{ $shade }-contrast: #{ tools.generate-contrast-color(var(--clr-#{ $key }-contrast), $value, $_contrast-threshold) };
+      }
     }
   }
 }

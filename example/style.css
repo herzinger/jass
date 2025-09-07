@@ -1,4 +1,4 @@
-@layer elements, utilities;
+@layer elements, components, utilities;
 @layer elements {
   :root {
     --px-baseline: 6px;
@@ -23,23 +23,44 @@
     --lh-banner: 1.125;
   }
   :root {
-    --clr-primary-default: #465568;
-    --clr-primary-default-contrast: color-mix(in oklch, #465568, hsl(from #465568 h calc(s + 0) 95%) 90%);
-    --clr-primary-light: color-mix(in oklch, #465568, hsl(from #465568 h calc(s + -80) 95%) 80%);
-    --clr-primary-light-contrast: color-mix(in oklch, #465568, hsl(from #465568 h calc(s + -80) 5%) 90%);
-    --clr-primary-dark: color-mix(in oklch, #465568, hsl(from #465568 h calc(s + 80) 5%) 80%);
-    --clr-primary-dark-contrast: color-mix(in oklch, #465568, hsl(from #465568 h calc(s + 80) 95%) 90%);
-    --clr-accent-default: #1da295;
-    --clr-accent-default-contrast: color-mix(in oklch, #1da295, hsl(from #1da295 h calc(s + 0) 95%) 90%);
-    --clr-accent-light: color-mix(in oklch, #1da295, hsl(from #1da295 h calc(s + -80) 95%) 80%);
-    --clr-accent-light-contrast: color-mix(in oklch, #1da295, hsl(from #1da295 h calc(s + -80) 5%) 90%);
-    --clr-accent-dark: color-mix(in oklch, #1da295, hsl(from #1da295 h calc(s + 80) 5%) 80%);
-    --clr-accent-dark-contrast: color-mix(in oklch, #1da295, hsl(from #1da295 h calc(s + 80) 95%) 90%);
+    --clr-neutral: #616165;
+    --clr-neutral-contrast: color-mix(in oklch, #616165, hsl(from #616165 h calc(s + 0) 90%) 90%);
+    --clr-neutral-dark: color-mix(in oklch, var(--clr-neutral), hsl(from var(--clr-neutral) h calc(s + 6) 5%) 60%);
+    --clr-neutral-dark-contrast: color-mix(in oklch, var(--clr-neutral-contrast), hsl(from var(--clr-neutral-contrast) h calc(s + 6) 90%) 90%);
+    --clr-neutral-light: color-mix(in oklch, var(--clr-neutral), hsl(from var(--clr-neutral) h calc(s + -6) 95%) 60%);
+    --clr-neutral-light-contrast: color-mix(in oklch, var(--clr-neutral-contrast), hsl(from var(--clr-neutral-contrast) h calc(s + -6) 10%) 90%);
+    --clr-primary: #385375;
+    --clr-primary-contrast: color-mix(in oklch, #385375, hsl(from #385375 h calc(s + 0) 90%) 90%);
+    --clr-primary-dark: color-mix(in oklch, var(--clr-primary), hsl(from var(--clr-primary) h calc(s + 6) 5%) 60%);
+    --clr-primary-dark-contrast: color-mix(in oklch, var(--clr-primary-contrast), hsl(from var(--clr-primary-contrast) h calc(s + 6) 90%) 90%);
+    --clr-primary-light: color-mix(in oklch, var(--clr-primary), hsl(from var(--clr-primary) h calc(s + -6) 95%) 60%);
+    --clr-primary-light-contrast: color-mix(in oklch, var(--clr-primary-contrast), hsl(from var(--clr-primary-contrast) h calc(s + -6) 10%) 90%);
+    --clr-accent: #0eaf9f;
+    --clr-accent-contrast: color-mix(in oklch, #0eaf9f, hsl(from #0eaf9f h calc(s + 0) 90%) 90%);
+    --clr-accent-dark: color-mix(in oklch, var(--clr-accent), hsl(from var(--clr-accent) h calc(s + 6) 5%) 60%);
+    --clr-accent-dark-contrast: color-mix(in oklch, var(--clr-accent-contrast), hsl(from var(--clr-accent-contrast) h calc(s + 6) 90%) 90%);
+    --clr-accent-light: color-mix(in oklch, var(--clr-accent), hsl(from var(--clr-accent) h calc(s + -6) 95%) 60%);
+    --clr-accent-light-contrast: color-mix(in oklch, var(--clr-accent-contrast), hsl(from var(--clr-accent-contrast) h calc(s + -6) 10%) 90%);
   }
 }
 @layer elements {
+  :root {
+    --clr-dark-surface: color-mix(in oklch, #616165, hsl(from #616165 h calc(s + 8) 5%) 80%);
+    --clr-light-surface: color-mix(in oklch, #616165, hsl(from #616165 h calc(s + -9) 95%) 90%);
+    --clr-light-text: color-mix(in oklch, #616165, hsl(from #616165 h calc(s + -8) 95%) 80%);
+    --clr-dark-text: color-mix(in oklch, #616165, hsl(from #616165 h calc(s + 6) 5%) 60%);
+  }
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
   html {
-    font-size: 16px;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: var(--fs-global);
+    box-sizing: border-box;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
   }
   body {
     font-size: var(--fs-default);
@@ -47,8 +68,21 @@
     font-family: "Open Sans", Helvetica-neue, arial, serif;
     margin: 0;
     padding: 0;
-    background-color: color-mix(in oklch, #465568, hsl(from #465568 h calc(s + -90) 95%) 90%);
-    color: color-mix(in oklch, #465568, hsl(from #465568 h calc(s + -90) 5%) 90%);
+    background-color: var(--_clr-body-bg);
+    color: var(--_clr-body-text);
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    body {
+      --_clr-body-bg: var(--clr-dark-surface);
+      --_clr-body-text: var(--clr-light-text);
+    }
+  }
+  @media (prefers-color-scheme: light) {
+    body {
+      --_clr-body-bg: var(--clr-light-surface);
+      --_clr-body-text: var(--clr-dark-text);
+    }
   }
   main, footer {
     max-width: 1200px;
@@ -61,8 +95,15 @@
   section {
     margin-block-end: var(--spacing-large);
   }
-  h1, h2, h3, h4, h5, h6 {
-    color: var(--clr-primary-default);
+  @media (prefers-color-scheme: light) {
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--clr-primary-dark);
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--clr-primary-light);
+    }
   }
   h2, h3, h4, h5, h6 {
     margin-block: 0 var(--spacing-default);
@@ -82,6 +123,24 @@
   }
   p {
     margin-block-end: var(--spacing-default);
+  }
+}
+@layer components {
+  .banner {
+    font-size: var(--fs-banner);
+    line-height: 1;
+  }
+  @media (prefers-color-scheme: light) {
+    .banner {
+      background-color: var(--clr-accent-dark);
+      color: var(--clr-accent-dark-contrast);
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    .banner {
+      background-color: var(--clr-accent-light);
+      color: var(--clr-accent-light-contrast);
+    }
   }
 }
 @layer utilities {

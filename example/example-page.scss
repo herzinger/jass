@@ -1,10 +1,26 @@
 @use '../settings' as settings;
 @use '../tools'    as tools;
 
-
 @layer elements {
+  :root {
+    --clr-dark-surface:  #{ tools.get-color(neutral, 900) };
+    --clr-light-surface: #{ tools.get-color(neutral, 50) };
+    --clr-light-text:    #{ tools.get-color(neutral, 100) };
+    --clr-dark-text:     #{ tools.get-color(neutral, 800) };
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+
   html {
-    font-size: settings.$global-font-size;
+    font-family:             'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size:               var(--fs-global);
+    box-sizing:              border-box;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing:  antialiased;
   }
 
   body {
@@ -13,8 +29,20 @@
     font-family:      'Open Sans', Helvetica-neue, arial, serif;
     margin:           0;
     padding:          0;
-    background-color: tools.get-color('primary', 50);
-    color:            tools.get-contrast('primary', 50);
+    background-color: var(--_clr-body-bg);
+    color:            var(--_clr-body-text);
+
+    color-scheme:     light dark;
+
+    @media (prefers-color-scheme: dark) {
+      --_clr-body-bg:   var(--clr-dark-surface);
+      --_clr-body-text: var(--clr-light-text);
+    }
+
+    @media (prefers-color-scheme: light) {
+      --_clr-body-bg:   var(--clr-light-surface);
+      --_clr-body-text: var(--clr-dark-text);
+    }
   }
 
 
@@ -34,8 +62,17 @@
     margin-block-end: var(--spacing-large);
   }
 
-  h1, h2, h3, h4, h5, h6 { color: tools.get-color('primary', default); }
-  h2, h3, h4, h5, h6 { margin-block: 0 var( --spacing-default); }
+  h1, h2, h3, h4, h5, h6 {
+    @media (prefers-color-scheme: light) {
+      color: tools.get-color(primary, dark);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      color: tools.get-color(primary, light);
+    }
+  }
+
+  h2, h3, h4, h5, h6 { margin-block: 0 var(--spacing-default); }
 
   h1 {
     @include tools.font-size(heading);
@@ -54,4 +91,18 @@
 
 
   p { margin-block-end: var(--spacing-default); }
+}
+
+@layer components {
+  .banner {
+    @include tools.font-size(banner, 1);
+
+    @media (prefers-color-scheme: light) {
+      @include tools.surface(accent, dark);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      @include tools.surface(accent, light);
+    }
+  }
 }

@@ -1,8 +1,27 @@
 @use 'sass:map';
 
 @use '../settings' as settings;
+@use 'tools.if'    as *;
 
 
+/// Returns a contrast color for a specified color palette and shade
+///
+/// @param {String} $palette-name - Name of the color palette
+/// @param {String|Number} $shade [default] - Shade value or alias
+///
+/// @return {Color|String} Returns either:
+///   - CSS variable for the contrast color if shade exists in settings.$shades
+///   - Direct contrast color value from the palette if custom shade
+///
+/// @throws Error if the color palette doesn't exist
+/// @throws Error if the shade doesn't exist in the color palette
+///
+/// @example scss
+///   .example {
+///     color: get-contrast(primary); // Returns var(--clr-primary-contrast)
+///     color: get-contrast(primary, light); // Returns var(--clr-primary-light-contrast)
+///     color: get-contrast(primary, 300); // Returns direct contrast color
+///   }
 @function get-contrast($palette-name, $shade: default) {
   @if (not map.has-key(settings.$palettes, $palette-name)) {
     @error 'Color palette #{ $palette-name } is not set. Use the `set-color-palette` mixin to add it.';
@@ -13,7 +32,11 @@
   }
 
   @if (map.has-key(settings.$shades, $shade)) {
-    @return var(--clr-#{ $palette-name }-#{ $shade }-contrast);
+    @return if(
+        $shade == default,
+        var(--clr-#{ $palette-name }-contrast),
+        var(--clr-#{ $palette-name }-#{ $shade }-contrast)
+    );
   }
 
   @return map.get(settings.$palettes, $palette-name, contrast, $shade);
