@@ -3,6 +3,7 @@
 
 @use '../settings' as settings;
 @use 'tools.get-label-index' as *;
+@use 'tools.px2rem' as *;
 
 
 @function get-spacing($label: default) {
@@ -16,5 +17,5 @@
     @error 'the label `#{ $label }` is not set in the `$spacing-labels` option.'
   }
 
-  @return math.div($multiplier * settings.$baseline, settings.$global-font-size) * 1rem;
+  @return px2rem($multiplier * settings.$baseline);
 }

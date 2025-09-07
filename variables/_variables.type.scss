@@ -2,7 +2,6 @@
 @use '../tools'    as tools;
 
 :root {
-  --px-baseline: #{ settings.$global-font-size };
   --fs-global: #{ settings.$global-font-size };
 
   @each $label in settings.$type-labels {

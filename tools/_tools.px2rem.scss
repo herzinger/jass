@@ -1,0 +1,16 @@
+@use 'sass:math';
+@use '../settings' as settings;
+
+/// Convert a pixel value to relative units (rem)
+///
+/// @param {Number} $px - Pixel value to convert
+/// @return {Number} - Converted value in rem units
+///
+/// @example scss
+///   .element {
+///     margin: px2rem(16px); // Returns 1rem
+///     padding: px2rem(24px); // Returns 1.5rem
+///   }
+@function px2rem($px) {
+  @return math.div($px, settings.$global-font-size) * 1rem;
+}

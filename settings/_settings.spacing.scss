@@ -1,8 +1,8 @@
 @use 'sass:list';
 
 // Default constants
-$_DEFAULT-SPACING-SCALE:  (1, 2, 3, 5, 8, 13);
-$_DEFAULT-SPACING-LABELS: (tiny, small, default, large, huge, giant);
+$_DEFAULT-SPACING-SCALE:  (1, 2, 3, 5, 8);
+$_DEFAULT-SPACING-LABELS: (tiny, small, default, large, huge);
 
 $baseline:                6px !default;
 $spacing-scale:           $_DEFAULT-SPACING-SCALE !default;

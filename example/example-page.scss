@@ -18,7 +18,7 @@
   main, footer {
     max-width:     1200px;
     margin-inline: auto;
-    padding:       tools.get-spacing(large) tools.get-spacing();
+    padding:       var(--spacing-large) var(--spacing-default);
   }
 
 
@@ -28,16 +28,16 @@
 
 
   section {
-    margin-block-end: tools.get-spacing(large);
+    margin-block-end: var(--spacing-large);
   }
 
 
-  h2, h3, h4, h5, h6 { margin-block: 0 tools.get-spacing(); }
+  h2, h3, h4, h5, h6 { margin-block: 0 var( --spacing-default); }
 
 
   h1 {
     @include tools.font-size(heading);
-    margin-block: 0 tools.get-spacing(large);
+    margin-block: 0 var(--spacing-large);
   }
 
 
@@ -51,5 +51,5 @@
   }
 
 
-  p { margin-block-end: tools.get-spacing(); }
+  p { margin-block-end: var(--spacing-default); }
 }

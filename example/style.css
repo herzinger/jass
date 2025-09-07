@@ -6,7 +6,6 @@
     --spacing-default: 1.125rem;
     --spacing-large: 1.875rem;
     --spacing-huge: 3rem;
-    --spacing-giant: 4.875rem;
   }
   :root {
     --px-baseline: 16px;
@@ -37,21 +36,21 @@
   main, footer {
     max-width: 1200px;
     margin-inline: auto;
-    padding: 1.875rem 1.125rem;
+    padding: var(--spacing-large) var(--spacing-default);
   }
   header, footer {
     text-align: center;
   }
   section {
-    margin-block-end: 1.875rem;
+    margin-block-end: var(--spacing-large);
   }
   h2, h3, h4, h5, h6 {
-    margin-block: 0 1.125rem;
+    margin-block: 0 var(--spacing-default);
   }
   h1 {
     font-size: var(--fs-heading);
     line-height: var(--lh-heading);
-    margin-block: 0 1.875rem;
+    margin-block: 0 var(--spacing-large);
   }
   h2 {
     font-size: var(--fs-subheading);
@@ -62,7 +61,7 @@
     line-height: var(--lh-default);
   }
   p {
-    margin-block-end: 1.125rem;
+    margin-block-end: var(--spacing-default);
   }
 }
 @layer utilities {
@@ -170,27 +169,6 @@
   }
   .u-pi-end-huge {
     padding-inline-end: var(--spacing-huge);
-  }
-  .u-p-giant {
-    padding: var(--spacing-giant);
-  }
-  .u-pb-giant {
-    padding-block: var(--spacing-giant);
-  }
-  .u-pb-start-giant {
-    padding-block-start: var(--spacing-giant);
-  }
-  .u-pb-end-giant {
-    padding-block-end: var(--spacing-giant);
-  }
-  .u-pi-giant {
-    padding-inline: var(--spacing-giant);
-  }
-  .u-pi-start-giant {
-    padding-inline-start: var(--spacing-giant);
-  }
-  .u-pi-end-giant {
-    padding-inline-end: var(--spacing-giant);
   }
   .u-p-none {
     padding: 0;
@@ -317,27 +295,6 @@
   }
   .u-mi-end-huge {
     margin-inline-end: var(--spacing-huge);
-  }
-  .u-m-giant {
-    margin: var(--spacing-giant);
-  }
-  .u-mb-giant {
-    margin-block: var(--spacing-giant);
-  }
-  .u-mb-start-giant {
-    margin-block-start: var(--spacing-giant);
-  }
-  .u-mb-end-giant {
-    margin-block-end: var(--spacing-giant);
-  }
-  .u-mi-giant {
-    margin-inline: var(--spacing-giant);
-  }
-  .u-mi-start-giant {
-    margin-inline-start: var(--spacing-giant);
-  }
-  .u-mi-end-giant {
-    margin-inline-end: var(--spacing-giant);
   }
   .u-m-none {
     margin: 0;

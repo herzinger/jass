@@ -3,6 +3,9 @@
 
 
 :root {
+  --px-baseline: #{ settings.$baseline };
+  --rem-baseline: #{ tools.px2rem(settings.$baseline) };
+
   @each $label in settings.$spacing-labels {
     --spacing-#{ $label }: #{ tools.get-spacing($label) };
   }

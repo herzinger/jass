@@ -4,6 +4,7 @@
 @use '../settings' as settings;
 @use 'tools.important' as *;
 @use 'tools.get-label-index' as *;
+@use 'tools.px2rem' as *;
 
 
 /// Get a font size value (in rem or px) from the Font Size Scale.
@@ -32,5 +33,5 @@
     @return $absolute;
   }
 
-  @return math.div($absolute, settings.$global-font-size) * 1rem;
+  @return px2rem($absolute);
 }
