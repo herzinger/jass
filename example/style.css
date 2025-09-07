@@ -27,25 +27,25 @@
     --clr-neutral-contrast: color-mix(in oklch, #616165, hsl(from #616165 h calc(s + 0) 90%) 90%);
     --clr-neutral-dark: color-mix(in oklch, var(--clr-neutral), hsl(from var(--clr-neutral) h calc(s + 6) 5%) 60%);
     --clr-neutral-dark-contrast: color-mix(in oklch, var(--clr-neutral-contrast), hsl(from var(--clr-neutral-contrast) h calc(s + 6) 90%) 90%);
-    --clr-neutral-light: color-mix(in oklch, var(--clr-neutral), hsl(from var(--clr-neutral) h calc(s + -6) 95%) 60%);
-    --clr-neutral-light-contrast: color-mix(in oklch, var(--clr-neutral-contrast), hsl(from var(--clr-neutral-contrast) h calc(s + -6) 10%) 90%);
+    --clr-neutral-light: color-mix(in oklch, var(--clr-neutral), hsl(from var(--clr-neutral) h calc(s + -4) 95%) 40%);
+    --clr-neutral-light-contrast: color-mix(in oklch, var(--clr-neutral-contrast), hsl(from var(--clr-neutral-contrast) h calc(s + -4) 10%) 90%);
     --clr-primary: #385375;
     --clr-primary-contrast: color-mix(in oklch, #385375, hsl(from #385375 h calc(s + 0) 90%) 90%);
     --clr-primary-dark: color-mix(in oklch, var(--clr-primary), hsl(from var(--clr-primary) h calc(s + 6) 5%) 60%);
     --clr-primary-dark-contrast: color-mix(in oklch, var(--clr-primary-contrast), hsl(from var(--clr-primary-contrast) h calc(s + 6) 90%) 90%);
-    --clr-primary-light: color-mix(in oklch, var(--clr-primary), hsl(from var(--clr-primary) h calc(s + -6) 95%) 60%);
-    --clr-primary-light-contrast: color-mix(in oklch, var(--clr-primary-contrast), hsl(from var(--clr-primary-contrast) h calc(s + -6) 10%) 90%);
+    --clr-primary-light: color-mix(in oklch, var(--clr-primary), hsl(from var(--clr-primary) h calc(s + -4) 95%) 40%);
+    --clr-primary-light-contrast: color-mix(in oklch, var(--clr-primary-contrast), hsl(from var(--clr-primary-contrast) h calc(s + -4) 10%) 90%);
     --clr-accent: #0eaf9f;
-    --clr-accent-contrast: color-mix(in oklch, #0eaf9f, hsl(from #0eaf9f h calc(s + 0) 90%) 90%);
+    --clr-accent-contrast: color-mix(in oklch, #0eaf9f, hsl(from #0eaf9f h calc(s + 0) 10%) 90%);
     --clr-accent-dark: color-mix(in oklch, var(--clr-accent), hsl(from var(--clr-accent) h calc(s + 6) 5%) 60%);
     --clr-accent-dark-contrast: color-mix(in oklch, var(--clr-accent-contrast), hsl(from var(--clr-accent-contrast) h calc(s + 6) 90%) 90%);
-    --clr-accent-light: color-mix(in oklch, var(--clr-accent), hsl(from var(--clr-accent) h calc(s + -6) 95%) 60%);
-    --clr-accent-light-contrast: color-mix(in oklch, var(--clr-accent-contrast), hsl(from var(--clr-accent-contrast) h calc(s + -6) 10%) 90%);
+    --clr-accent-light: color-mix(in oklch, var(--clr-accent), hsl(from var(--clr-accent) h calc(s + -4) 95%) 40%);
+    --clr-accent-light-contrast: color-mix(in oklch, var(--clr-accent-contrast), hsl(from var(--clr-accent-contrast) h calc(s + -4) 10%) 90%);
   }
 }
 @layer elements {
   :root {
-    --clr-dark-surface: color-mix(in oklch, #616165, hsl(from #616165 h calc(s + 8) 5%) 80%);
+    --clr-dark-surface: color-mix(in oklch, #616165, hsl(from #616165 h calc(s + 6) 5%) 60%);
     --clr-light-surface: color-mix(in oklch, #616165, hsl(from #616165 h calc(s + -9) 95%) 90%);
     --clr-light-text: color-mix(in oklch, #616165, hsl(from #616165 h calc(s + -8) 95%) 80%);
     --clr-dark-text: color-mix(in oklch, #616165, hsl(from #616165 h calc(s + 6) 5%) 60%);
@@ -132,8 +132,8 @@
   }
   @media (prefers-color-scheme: light) {
     .banner {
-      background-color: var(--clr-accent-dark);
-      color: var(--clr-accent-dark-contrast);
+      background-color: var(--clr-accent);
+      color: var(--clr-accent-contrast);
     }
   }
   @media (prefers-color-scheme: dark) {

@@ -1,6 +1,6 @@
 @use 'sass:meta';
 
-@use '../settings' as settings with ( $shades: ( default: 500, dark: 800, light: 200) );
+@use '../settings' as settings with ( $shades: ( default: 500, dark: 800, light: 300) );
 @use '../tools'    as tools;
 
 @layer elements, components, utilities;
@@ -8,7 +8,7 @@
 @layer elements {
   $neutral-palette: tools.generate-color-palette(#616165);
   $primary-palette: tools.generate-color-palette(#385375);
-  $accent-palette: tools.generate-color-palette(#0eaf9f);
+  $accent-palette: tools.generate-color-palette(#0eaf9f, 600);
 
   @include settings.set-color-palette(neutral, $neutral-palette);
   @include settings.set-color-palette(primary, $primary-palette);

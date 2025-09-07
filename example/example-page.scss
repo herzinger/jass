@@ -3,7 +3,7 @@
 
 @layer elements {
   :root {
-    --clr-dark-surface:  #{ tools.get-color(neutral, 900) };
+    --clr-dark-surface:  #{ tools.get-color(neutral, 800) };
     --clr-light-surface: #{ tools.get-color(neutral, 50) };
     --clr-light-text:    #{ tools.get-color(neutral, 100) };
     --clr-dark-text:     #{ tools.get-color(neutral, 800) };
@@ -98,7 +98,7 @@
     @include tools.font-size(banner, 1);
 
     @media (prefers-color-scheme: light) {
-      @include tools.surface(accent, dark);
+      @include tools.surface(accent);
     }
 
     @media (prefers-color-scheme: dark) {
