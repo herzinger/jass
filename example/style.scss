@@ -1,8 +1,17 @@
 @use 'sass:meta';
 
+@use '../settings' as settings;
+@use '../tools'    as tools;
+
 @layer elements, utilities;
 
 @layer elements {
+  $primary-palette: tools.generate-color-palette(#465568);
+  $accent-palette: tools.generate-color-palette(#1da295);
+
+  @include settings.set-color-palette(primary, $primary-palette);
+  @include settings.set-color-palette(accent, $accent-palette);
+
   @include meta.load-css('../variables');
 }
 

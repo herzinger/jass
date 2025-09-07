@@ -1,0 +1,35 @@
+@use 'sass:map';
+
+@use '../settings' as settings;
+
+
+/// Gets a color value from a specified palette and shade
+///
+/// @param {String} $palette-name - Name of the color palette to retrieve from
+/// @param {String} $shade [default] - Shade name or value to retrieve (default, light, dark, etc.)
+///
+/// @return {Color|String} Returns either a CSS custom property or direct color value
+///
+/// @error When specified palette name doesn't exist
+/// @error When specified shade doesn't exist in the palette
+///
+/// @example scss
+///   .element {
+///     color: get-color(primary, light);
+///     background: get-color(secondary, 500);
+///   }
+@function get-color($palette-name, $shade: default) {
+  @if (not map.has-key(settings.$palettes, $palette-name)) {
+    @error 'Color palette #{ $palette-name } is not set. Use the `set-color-palette` mixin to add it.';
+  }
+
+  @if (not map.has-key(settings.$palettes, $palette-name, $shade)) {
+    @error 'Color palette #{ $palette-name } does not have a #{ $shade } shade.';
+  }
+
+  @if (map.has-key(settings.$shades, $shade)) {
+    @return var(--clr-#{ $palette-name }-#{ $shade });
+  }
+
+  @return map.get(settings.$palettes, $palette-name, $shade);
+}

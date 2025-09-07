@@ -1,0 +1,48 @@
+@use 'sass:list';
+@use 'sass:map';
+
+/// Default shades map defining standard color shade values.
+/// @type Map
+/// @access private
+$_DEFAULT-SHADES: (default: 500, light: 100, dark: 900);
+
+/// Configurable shades map for customizing color shade values.
+/// @type Map
+/// @access public
+$shades:          $_DEFAULT-SHADES !default;
+
+/// Color palette map storing generated color palettes.
+/// Contains shades (50-900) and contrast colors for each shade.
+/// Generated using get-color-palette() function.
+/// @type Map
+/// @access public
+/// @example scss
+///   $palettes: (
+///     primary: get-color-palette($primary-color),
+///     accent: get-color-palette($accent-color)
+///   );
+$palettes: ();
+
+/// Updates a specific color palette in the global $palettes map
+///
+/// @param {String} $name - Name of the palette to add/update
+/// @param {Map} $palette - Color palette map containing shades and contrasts
+/// @access public
+/// @example scss
+///   @include set-color-palette('primary', generate-color-palette(#ace));
+@mixin set-color-palette($name, $palette) {
+  $palettes: map.set($palettes, $name, $palette) !global;
+}
+
+/// Gets a color palette from the global $palettes map
+///
+/// @param {String} $name - Name of the palette to retrieve
+/// @param {Map} $palette - The palette to lookup
+/// @return {Map} The requested color palette
+/// @access public
+/// @example scss
+///   $primary-palette: get-color-palette('primary', $palettes);
+@function get-color-palette($name, $palette) {
+  @return map.get($palettes, $name);
+}
+

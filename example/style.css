@@ -1,6 +1,8 @@
 @layer elements, utilities;
 @layer elements {
   :root {
+    --px-baseline: 6px;
+    --rem-baseline: 0.375rem;
     --spacing-tiny: 0.375rem;
     --spacing-small: 0.75rem;
     --spacing-default: 1.125rem;
@@ -8,7 +10,6 @@
     --spacing-huge: 3rem;
   }
   :root {
-    --px-baseline: 16px;
     --fs-global: 16px;
     --fs-small: 0.875rem;
     --lh-small: 1.7142857143;
@@ -21,6 +22,20 @@
     --fs-banner: 5rem;
     --lh-banner: 1.125;
   }
+  :root {
+    --clr-primary-default: #465568;
+    --clr-primary-default-contrast: color-mix(in oklch, #465568, hsl(from #465568 h calc(s + 0) 95%) 90%);
+    --clr-primary-light: color-mix(in oklch, #465568, hsl(from #465568 h calc(s + -80) 95%) 80%);
+    --clr-primary-light-contrast: color-mix(in oklch, #465568, hsl(from #465568 h calc(s + -80) 5%) 90%);
+    --clr-primary-dark: color-mix(in oklch, #465568, hsl(from #465568 h calc(s + 80) 5%) 80%);
+    --clr-primary-dark-contrast: color-mix(in oklch, #465568, hsl(from #465568 h calc(s + 80) 95%) 90%);
+    --clr-accent-default: #1da295;
+    --clr-accent-default-contrast: color-mix(in oklch, #1da295, hsl(from #1da295 h calc(s + 0) 95%) 90%);
+    --clr-accent-light: color-mix(in oklch, #1da295, hsl(from #1da295 h calc(s + -80) 95%) 80%);
+    --clr-accent-light-contrast: color-mix(in oklch, #1da295, hsl(from #1da295 h calc(s + -80) 5%) 90%);
+    --clr-accent-dark: color-mix(in oklch, #1da295, hsl(from #1da295 h calc(s + 80) 5%) 80%);
+    --clr-accent-dark-contrast: color-mix(in oklch, #1da295, hsl(from #1da295 h calc(s + 80) 95%) 90%);
+  }
 }
 @layer elements {
   html {
@@ -32,6 +47,8 @@
     font-family: "Open Sans", Helvetica-neue, arial, serif;
     margin: 0;
     padding: 0;
+    background-color: color-mix(in oklch, #465568, hsl(from #465568 h calc(s + -90) 95%) 90%);
+    color: color-mix(in oklch, #465568, hsl(from #465568 h calc(s + -90) 5%) 90%);
   }
   main, footer {
     max-width: 1200px;
@@ -43,6 +60,9 @@
   }
   section {
     margin-block-end: var(--spacing-large);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--clr-primary-default);
   }
   h2, h3, h4, h5, h6 {
     margin-block: 0 var(--spacing-default);

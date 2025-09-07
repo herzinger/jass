@@ -1,0 +1,20 @@
+@use 'sass:map';
+
+@use '../settings' as settings;
+
+
+@function get-contrast($palette-name, $shade: default) {
+  @if (not map.has-key(settings.$palettes, $palette-name)) {
+    @error 'Color palette #{ $palette-name } is not set. Use the `set-color-palette` mixin to add it.';
+  }
+
+  @if (not map.has-key(settings.$palettes, $palette-name, contrast, $shade)) {
+    @error 'Color palette #{ $palette-name } does not have a #{ $shade } shade.';
+  }
+
+  @if (map.has-key(settings.$shades, $shade)) {
+    @return var(--clr-#{ $palette-name }-#{ $shade }-contrast);
+  }
+
+  @return map.get(settings.$palettes, $palette-name, contrast, $shade);
+}

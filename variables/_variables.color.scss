@@ -1,0 +1,14 @@
+@use 'sass:map';
+
+@use '../settings' as settings;
+@use '../tools'    as tools;
+
+
+:root {
+  @each $key in map.keys(settings.$palettes) {
+    @each $shade, $value in settings.$shades {
+      --clr-#{ $key }-#{ $shade }:          #{ tools.get-color($key, $value) };
+      --clr-#{ $key }-#{ $shade }-contrast: #{ tools.get-contrast($key, $value) };
+    }
+  }
+}

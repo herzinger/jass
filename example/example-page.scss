@@ -1,6 +1,7 @@
 @use '../settings' as settings;
 @use '../tools'    as tools;
 
+
 @layer elements {
   html {
     font-size: settings.$global-font-size;
@@ -9,9 +10,11 @@
   body {
     @include tools.font-size();
 
-    font-family: 'Open Sans', Helvetica-neue, arial, serif;
-    margin:      0;
-    padding:     0;
+    font-family:      'Open Sans', Helvetica-neue, arial, serif;
+    margin:           0;
+    padding:          0;
+    background-color: tools.get-color('primary', 50);
+    color:            tools.get-contrast('primary', 50);
   }
 
 
@@ -31,9 +34,8 @@
     margin-block-end: var(--spacing-large);
   }
 
-
+  h1, h2, h3, h4, h5, h6 { color: tools.get-color('primary', default); }
   h2, h3, h4, h5, h6 { margin-block: 0 var( --spacing-default); }
-
 
   h1 {
     @include tools.font-size(heading);
