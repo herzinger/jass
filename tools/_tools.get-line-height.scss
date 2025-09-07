@@ -6,22 +6,34 @@
 @use 'tools.get-label-index' as *;
 
 
-// Define how many grid lines each text line should span.
-// By default, we set it to the minimum number of lines necessary
-// in order to contain the defined font-size, +1 for some breathing room.
-// This can be modified with the `$modifier` parameter.
-
+/// Calculate line height based on font size and baseline grid.
+///
+/// @param {String|Number} $labelOrPxValue [default] - Font size label from type scale or pixel value
+/// @param {Number} $modifier [0] - Modifier to add additional grid lines
+///
+/// @return {Number} - Calculated line height as a unitless ratio
+///
+/// @example scss
+///   .element {
+///     line-height: get-line-height(heading);     // Use scale label
+///     line-height: get-line-height(16px);        // Use pixel value
+///     line-height: get-line-height(heading, 1);  // Add 1 extra grid line
+///   }
 @function get-line-height(
-  $px-font-size: default,
+  $labelOrPxValue: default,
   $modifier: 0
 ) {
+  // Define how many grid lines each text line should span.
+  // By default, we set it to the minimum number of lines necessary
+  // in order to contain the defined font-size, +1 for some breathing room.
+  // This can be modified with the `$modifier` parameter.
 
-  @if (get-label-index(settings.$type-labels, $px-font-size) != null) {
-    $px-font-size: get-font-size($px-font-size, false);
+  @if (get-label-index(settings.$type-labels, $labelOrPxValue) != null) {
+    $labelOrPxValue: get-font-size($labelOrPxValue, false);
   }
 
-  $lines:          math.ceil(math.div($px-font-size, settings.$baseline)) + 1 + $modifier;
+  $lines: math.ceil(math.div($labelOrPxValue, settings.$baseline)) + 1 + $modifier;
   $px-line-height: $lines * settings.$baseline;
 
-  @return math.div($px-line-height, $px-font-size);
+  @return math.div($px-line-height, $labelOrPxValue);
 }

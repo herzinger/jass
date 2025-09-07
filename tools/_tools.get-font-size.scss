@@ -1,10 +1,10 @@
 @use 'sass:math';
 @use 'sass:list';
 
-@use '../settings' as settings;
-@use 'tools.important' as *;
+@use '../settings'           as settings;
+@use 'tools.important'       as *;
 @use 'tools.get-label-index' as *;
-@use 'tools.px2rem' as *;
+@use 'tools.px2rem'          as *;
 
 
 /// Get a font size value (in rem or px) from the Font Size Scale.

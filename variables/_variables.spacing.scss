@@ -3,9 +3,22 @@
 
 
 :root {
-  --px-baseline: #{ settings.$baseline };
+  /// Base line height value in pixels (absolute)
+  /// @access public
+  --px-baseline:  #{ settings.$baseline };
+
+  /// Base line height value in rem (relative)
+  /// @access public
   --rem-baseline: #{ tools.px2rem(settings.$baseline) };
 
+  /// Generate spacing custom properties for each label in the spacing scale
+  /// @access public
+  /// @example css
+  ///   --spacing-tiny: 6px;
+  ///   --spacing-small: 12px;
+  ///   --spacing-default: 18px;
+  ///   --spacing-large: 30px;
+  ///   --spacing-huge: 48px;
   @each $label in settings.$spacing-labels {
     --spacing-#{ $label }: #{ tools.get-spacing($label) };
   }

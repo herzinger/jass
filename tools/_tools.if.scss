@@ -1,3 +1,14 @@
+/// If/Else ternary function. Returns $if-true if condition is true, $if-false otherwise.
+///
+/// @param {Boolean} $condition - The condition to evaluate
+/// @param {*} $if-true - The value to return if condition is true
+/// @param {*} $if-false - The value to return if condition is false
+///
+/// @return {*} - Returns $if-true if condition is true, $if-false otherwise
+///
+/// @example scss
+///   $value: if(true, 100px, 200px); // Returns 100px
+///   $value: if(false, 100px, 200px); // Returns 200px
 @function if($condition, $if-true, $if-false) {
   @if ($condition) {
     @return $if-true;

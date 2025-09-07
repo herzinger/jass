@@ -2,6 +2,16 @@
 @use "sass:meta";
 
 
+/// Get index of a label in a list of labels. Used for finding font/spacing scales.
+///
+/// @param {List} $labels-list - List of labels to search through
+/// @param {String} $label - Label to find in the list
+///
+/// @return {Number|Null} - Index of label in list (1-based) or null if not found
+///
+/// @example scss
+///   $labels: (small, default, large);
+///   $index: get-label-index($labels, default); // Returns 2
 @function get-label-index($labels-list, $label) {
 
   @if (meta.type-of($labels-list) != list) {

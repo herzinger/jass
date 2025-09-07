@@ -12,6 +12,17 @@
 }
 
 
+/// Generates spacing utility classes using the provided settings.
+/// Creates classes for padding and margin with various orientations and positions.
+///
+/// @example scss
+///   // Generates classes like:
+///   .u-p { padding: var(--spacing-default); }
+///   .u-p-tiny { padding: var(--spacing-tiny); }
+///   .u-pb { padding-block: var(--spacing-default); }
+///   .u-pb-start { padding-block-start: var(--spacing-default); }
+///   .u-m-large { margin: var(--spacing-large); }
+///   .u-mi-end { margin-inline-end: var(--spacing-default); }
 @each $property, $property-label in settings.$spacing-properties {
 
   @each $size in settings.$spacing-sizes {

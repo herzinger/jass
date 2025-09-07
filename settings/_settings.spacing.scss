@@ -1,16 +1,47 @@
 @use 'sass:list';
 
-// Default constants
+
+/// @type List
+/// @access private
 $_DEFAULT-SPACING-SCALE:  (1, 2, 3, 5, 8);
+
+/// @type List
+/// @access private
 $_DEFAULT-SPACING-LABELS: (tiny, small, default, large, huge);
 
+/// Base unit used for spacing calculations
+/// @type Number (with unit)
+/// @access public
 $baseline:                6px !default;
+
+/// List of spacing multipliers
+/// @type List
+/// @access public
 $spacing-scale:           $_DEFAULT-SPACING-SCALE !default;
+
+/// List of spacing size labels
+/// @type List
+/// @access public
 $spacing-labels:          $_DEFAULT-SPACING-LABELS !default;
 
+/// Map of spacing properties and their shorthand codes
+/// @type Map
+/// @access public
 $spacing-properties:      (padding: 'p', margin: 'm') !default;
+
+/// Map of spacing orientations and their shorthand codes
+/// @type Map
+/// @access public
 $spacing-orientations:    (block: 'b', inline: 'i') !default;
+
+/// List of spacing position values
+/// @type List
+/// @access public
 $spacing-positions:       (start, end) !default;
+
+/// List of spacing size options including 'none'
+/// @type List
+/// @access public
 $spacing-sizes:           list.append($spacing-labels, none) !default;
 
 @if (list.length($spacing-scale) != list.length($spacing-labels)) {

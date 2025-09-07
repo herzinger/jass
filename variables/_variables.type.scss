@@ -2,10 +2,28 @@
 @use '../tools'    as tools;
 
 :root {
+  /// Set global font size and generate font-size (--fs-*) and line-height (--lh-*)
+  /// CSS custom properties for each type scale label
+  ///
+  /// @access public
+  /// @require {variable} settings.$global-font-size - Base font size
+  /// @require {function} tools.get-font-size - Gets font size for a label
+  /// @require {function} tools.get-line-height - Gets line height for a label
+  /// @require {list} settings.$type-labels - List of type scale labels
+  ///
+  /// @example scss
+  ///   // Generated CSS custom properties
+  ///   :root {
+  ///     --fs-small: 0.875rem;
+  ///     --lh-small: 1.5;
+  ///     --fs-default: 1rem;
+  ///     --lh-default: 1.5;
+  ///     // etc.
+  ///   }
   --fs-global: #{ settings.$global-font-size };
 
   @each $label in settings.$type-labels {
     --fs-#{ $label }: #{ tools.get-font-size($label) };
     --lh-#{ $label }: #{ tools.get-line-height($label) };
-  }
+    }
 }

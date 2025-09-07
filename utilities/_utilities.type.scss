@@ -2,6 +2,13 @@
 @use '../tools'    as tools;
 
 
+/// Generate utility classes for setting font sizes based on the type scale labels.
+/// Each class will set both font-size and line-height using the font-size mixin.
+///
+/// @example css
+///   .u-fs-small { font-size: var(--fs-small); line-height: var(--lh-small); }
+///   .u-fs-default { font-size: var(--fs-default); line-height: var(--lh-default); }
+///   .u-fs-heading { font-size: var(--fs-heading); line-height: var(--lh-heading); }
 @each $label in settings.$type-labels {
   .u-fs-#{ $label } {
     @include tools.font-size($label);

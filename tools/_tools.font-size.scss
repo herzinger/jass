@@ -8,31 +8,21 @@
 @use 'tools.important'       as *;
 
 
-///* ========================================================================
-//   #FONT-SIZE
-//   ======================================================================== */
-
-// Generates a rem font-size (with pixel fallback) and a baseline-compatible
-// unitless line-height from a pixel font-size value. Basic usage is simply:
-//
-//   @include font-size(subheading);
-//
-// You can force a specific line-height by passing it as the second argument:
-//
-//   @include font-size(heading, 1);
-//
-// You can also modify the line-height by increments, while staying in the
-// baseline grid, by setting the `$modifier` parameter. It takes a positive
-// or negative integer, and it will add or remove "lines" to the  generated
-// line-height. This is the recommended way to do it, unless you really need
-// an absolute value. i.e.:
-//
-//   // add 2 lines:
-//   @include font-size(default, $modifier: +2);
-//
-//   // subtract 1 line:
-//   @include font-size(default, $modifier: -1);
-
+/// Sets font size and line height based on a label from the type scale or a pixel value.
+///
+/// @param {String|Number} $labelOrPxValue [default] - Font size label from type scale or pixel value
+/// @param {String|Number} $line-height [auto] - Line height value or 'auto' for calculated line height
+/// @param {Number} $modifier [0] - Modifier to adjust auto line height calculation
+/// @param {Boolean} $force [false] - Whether to add !important to declarations
+///
+/// @example scss
+///   .element {
+///     @include font-size(heading);                // Use scale label
+///     @include font-size(16px);                  // Use pixel value
+///     @include font-size(heading, 1.5);          // Custom line height
+///     @include font-size(heading, auto, 1);      // Modified auto line height
+///     @include font-size(heading, auto, 0, true); // Force with !important
+///   }
 @mixin font-size(
   $labelOrPxValue: default,
   $line-height: auto,

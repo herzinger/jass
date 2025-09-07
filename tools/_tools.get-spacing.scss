@@ -1,11 +1,23 @@
 @use 'sass:math';
 @use 'sass:list';
 
-@use '../settings' as settings;
+@use '../settings'           as settings;
 @use 'tools.get-label-index' as *;
-@use 'tools.px2rem' as *;
+@use 'tools.px2rem'          as *;
 
 
+/// Get spacing value from spacing scale using a label
+///
+/// @param {String} $label [default] - Spacing label from scale
+///
+/// @return {Number} - Spacing value in rem
+///
+/// @example scss
+///   .element {
+///     padding: get-spacing(large);  // Get large spacing
+///     margin: get-spacing(none);    // Get 0 spacing
+///     gap: get-spacing();          // Get default spacing
+///   }
 @function get-spacing($label: default) {
 
   @if ($label == none) { @return 0; }
