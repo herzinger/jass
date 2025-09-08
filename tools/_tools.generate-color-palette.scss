@@ -60,7 +60,5 @@
     ));
   }
 
-  $_palette: map.merge($_palette, (contrast: $_contrasts, contrast-threshold: $contrast-threshold));
-
-  @return $_palette;
+  @return map.merge($_palette, (contrast: $_contrasts, contrast-threshold: $contrast-threshold));
 }

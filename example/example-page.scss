@@ -37,11 +37,13 @@
     @media (prefers-color-scheme: dark) {
       --_clr-body-bg:   var(--clr-dark-surface);
       --_clr-body-text: var(--clr-light-text);
+      --clr-border:     #{ tools.get-color(neutral, 600) };
     }
 
     @media (prefers-color-scheme: light) {
       --_clr-body-bg:   var(--clr-light-surface);
       --_clr-body-text: var(--clr-dark-text);
+      --clr-border:     #{ tools.get-color(neutral, 200) };
     }
   }
 
@@ -103,6 +105,36 @@
 
     @media (prefers-color-scheme: dark) {
       @include tools.surface(accent, light);
+    }
+  }
+
+  .palette {
+    --_border-radius:      1rem;
+
+    display:               grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap:                   0;
+    border:                1px solid var(--clr-border);
+    border-radius:          var(--_border-radius);
+  }
+
+  .color {
+    aspect-ratio:     1;
+    display:          grid;
+    place-items:      center;
+
+    &:first-of-type {
+      border-radius: var(--_border-radius) 0 0 var(--_border-radius);
+    }
+
+    &:last-of-type {
+      border-radius: 0 var(--_border-radius) var(--_border-radius) 0;
+    }
+
+    @for $i from 1 through 9 {
+      &:nth-child(#{ $i }) {
+        @include tools.surface(primary, $i * 100);
+      }
     }
   }
 }
