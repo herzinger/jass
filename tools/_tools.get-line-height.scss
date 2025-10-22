@@ -1,7 +1,8 @@
 @use 'sass:math';
-@use "sass:list";
+@use "sass:map";
 
 @use '../settings'           as settings;
+@use 'tools.if'              as *;
 @use 'tools.get-font-size'   as *;
 @use 'tools.get-label-index' as *;
 
@@ -20,7 +21,7 @@
 ///     line-height: get-line-height(heading, 1);  // Add 1 extra grid line
 ///   }
 @function get-line-height(
-  $labelOrPxValue: default,
+  $label-or-px-value: settings.$default-type-size,
   $modifier: 0
 ) {
   // Define how many grid lines each text line should span.
@@ -28,12 +29,11 @@
   // in order to contain the defined font-size, +1 for some breathing room.
   // This can be modified with the `$modifier` parameter.
 
-  @if (get-label-index(settings.$type-labels, $labelOrPxValue) != null) {
-    $labelOrPxValue: get-font-size($labelOrPxValue, false);
-  }
+  $is-label: map.has-key(settings.$type-sizes, $label-or-px-value);
+  $px-value: if($is-label, get-font-size($label-or-px-value, true), $label-or-px-value);
 
-  $lines: math.ceil(math.div($labelOrPxValue, settings.$baseline)) + 1 + $modifier;
+  $lines: math.ceil(math.div($px-value, settings.$baseline)) + 1 + $modifier;
   $px-line-height: $lines * settings.$baseline;
 
-  @return math.div($px-line-height, $labelOrPxValue);
+  @return math.div($px-line-height, $px-value);
 }

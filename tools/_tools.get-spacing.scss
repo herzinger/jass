@@ -1,33 +1,31 @@
 @use 'sass:math';
-@use 'sass:list';
+@use 'sass:map';
 
-@use '../settings'           as settings;
-@use 'tools.get-label-index' as *;
-@use 'tools.px2rem'          as *;
+@use '../settings'  as settings;
+@use 'tools.px2rem' as *;
 
 
 /// Get spacing value from spacing scale using a label
 ///
-/// @param {String} $label [default] - Spacing label from scale
+/// @param {String} $label - Spacing label from scale
 ///
 /// @return {Number} - Spacing value in rem
 ///
 /// @example scss
 ///   .element {
-///     padding: get-spacing(large);  // Get large spacing
-///     margin: get-spacing(none);    // Get 0 spacing
-///     gap: get-spacing();          // Get default spacing
+///     padding: get-spacing(lg);  // Get large spacing
+///     margin: get-spacing(none); // Get 0 spacing
+///     gap: get-spacing();        // Get default spacing
 ///   }
-@function get-spacing($label: default) {
+@function get-spacing($label: settings.$default-spacing-size) {
 
   @if ($label == none) { @return 0; }
 
-  $index: get-label-index(settings.$spacing-labels, $label);
-  $multiplier: list.nth(settings.$spacing-scale, $index);
-
-  @if ($index == null) {
-    @error 'the label `#{ $label }` is not set in the `$spacing-labels` option.'
+  @if (not map.has-key(settings.$spacing-sizes, $label)) {
+    @error 'the size `#{ $label }` is not set in the `$spacing-sizes` map.'
   }
+
+  $multiplier: map.get(settings.$spacing-sizes, $label);
 
   @return px2rem($multiplier * settings.$baseline);
 }

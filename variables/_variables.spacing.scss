@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 @use '../settings' as settings;
 @use '../tools'    as tools;
 
@@ -14,12 +16,12 @@
   /// Generate spacing custom properties for each label in the spacing scale
   /// @access public
   /// @example css
-  ///   --spacing-tiny: 6px;
-  ///   --spacing-small: 12px;
-  ///   --spacing-default: 18px;
-  ///   --spacing-large: 30px;
-  ///   --spacing-huge: 48px;
-  @each $label in settings.$spacing-labels {
-    --spacing-#{ $label }: #{ tools.get-spacing($label) };
+  ///   --spc-xs: 0.375rem;
+  ///   --spc-sm: 0.75rem;
+  ///   --spc-md: 1.125rem;
+  ///   --spc-lg: 1.875rem;
+  ///   --spc-xl: 3rem;
+  @each $label in map.keys(settings.$spacing-sizes) {
+    --spc-#{ $label }: #{ tools.get-spacing($label) };
   }
 }

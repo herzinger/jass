@@ -2,31 +2,23 @@
 @use 'sass:list';
 
 
-/// Default type scale multipliers
-/// @type List
-/// @access private
-$_DEFAULT-TYPE-SCALE:  (.875, 1, 2, 3, 5);
-
-/// Default type size labels
-/// @type List
-/// @access private
-$_DEFAULT-TYPE-LABELS: (small, default, subheading, heading, banner);
-
 /// Base font size in pixels
 /// @type Number (with unit)
 /// @access public
-$global-font-size:     16px !default;
+$global-font-size:  16px !default;
 
-/// List of type scale multipliers
-/// @type List
+/// Map of type sizes, where labels are keys and scale multipliers are values.
+/// @type Map
 /// @access public
-$type-scale:           $_DEFAULT-TYPE-SCALE !default;
+$type-sizes:        (
+                      sm: .875,
+                      md: 1,
+                      lg: 2,
+                      xl: 3,
+                      xxl: 5
+                    ) !default;
 
-/// List of type size labels
-/// @type List
+/// Default type size used throughout the design system
+/// @type String
 /// @access public
-$type-labels:          $_DEFAULT-TYPE-LABELS !default;
-
-@if (list.length($type-scale) != list.length($type-labels)) {
-  @error 'the `$type-labels` and `$type-scale` options must have the same length.'
-}
+$default-type-size: md !default;

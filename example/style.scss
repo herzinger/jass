@@ -1,12 +1,18 @@
 @use 'sass:meta';
 
 @use '../settings' as settings with (
-  $shades: ( default: 500, dark: 800, light: 300 ),
+  $shades:     ( default: 500, dark: 800, light: 100 ),
+  $type-sizes: ( default: 1, h1: 3, h2: 2.25, h3: 1.5, h4: 1.25, h5: 1, h6: .875 ),
+  $default-type-size: default,
 );
 
 @use '../tools' as tools;
 
+
+// @debug settings.$spacing-sizes;
+
 @layer elements, components, utilities;
+
 
 @layer elements {
   $neutral-palette: tools.generate-color-palette(#616165);
@@ -20,9 +26,11 @@
   @include meta.load-css('../variables');
 }
 
+
 @layer components {
   @include meta.load-css('example-page');
 }
+
 
 @layer utilities {
   @include meta.load-css('../utilities');

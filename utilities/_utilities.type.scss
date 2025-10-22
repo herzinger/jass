@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 @use '../settings' as settings;
 @use '../tools'    as tools;
 
@@ -6,10 +8,10 @@
 /// Each class will set both font-size and line-height using the font-size mixin.
 ///
 /// @example css
-///   .u-fs-small { font-size: var(--fs-small); line-height: var(--lh-small); }
-///   .u-fs-default { font-size: var(--fs-default); line-height: var(--lh-default); }
-///   .u-fs-heading { font-size: var(--fs-heading); line-height: var(--lh-heading); }
-@each $label in settings.$type-labels {
+///   .u-fs-sm { font-size: var(--fs-sm); line-height: var(--lh-sm); }
+///   .u-fs-md { font-size: var(--fs-md); line-height: var(--lh-md); }
+///   .u-fs-lg { font-size: var(--fs-lg); line-height: var(--lh-lg); }
+@each $label in map.keys(settings.$type-sizes) {
   .u-fs-#{ $label } {
     @include tools.font-size($label);
   }

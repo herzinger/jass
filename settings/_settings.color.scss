@@ -37,12 +37,11 @@ $palettes: ();
 /// Gets a color palette from the global $palettes map
 ///
 /// @param {String} $name - Name of the palette to retrieve
-/// @param {Map} $palette - The palette to lookup
 /// @return {Map} The requested color palette
 /// @access public
 /// @example scss
-///   $primary-palette: get-color-palette('primary', $palettes);
-@function get-color-palette($name, $palette) {
+///   $primary-palette: get-color-palette('primary');
+@function get-color-palette($name) {
   @return map.get($palettes, $name);
 }
 

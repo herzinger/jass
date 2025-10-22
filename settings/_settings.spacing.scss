@@ -1,49 +1,43 @@
 @use 'sass:list';
 
-
-/// @type List
-/// @access private
-$_DEFAULT-SPACING-SCALE:  (1, 2, 3, 5, 8);
-
-/// @type List
-/// @access private
-$_DEFAULT-SPACING-LABELS: (tiny, small, default, large, huge);
-
 /// Base unit used for spacing calculations
 /// @type Number (with unit)
 /// @access public
-$baseline:                6px !default;
+$baseline:             6px !default;
 
-/// List of spacing multipliers
-/// @type List
+/// Spacing size scale map defining the multipliers for the baseline spacing system.
+/// Each key represents a size label, and each value is a multiplier that will be
+/// applied to the base spacing unit to generate consistent spacing values.
+/// @type Map
 /// @access public
-$spacing-scale:           $_DEFAULT-SPACING-SCALE !default;
+/// @see {variable} $baseline - The base unit that multipliers are applied to
+/// @see {variable} $spacing-properties - Properties that use these sizes
+/// @see {function} get-spacing - Function to retrieve spacing values
+$spacing-sizes:        (
+                         xs: 1,
+                         sm: 2,
+                         md: 3,
+                         lg: 5,
+                         xl: 8
+                       ) !default;
 
-/// List of spacing size labels
-/// @type List
+/// Default spacing size label used when no size is specified
+/// @type String
 /// @access public
-$spacing-labels:          $_DEFAULT-SPACING-LABELS !default;
+/// @see {variable} $spacing-labels
+$default-spacing-size: md !default;
 
 /// Map of spacing properties and their shorthand codes
 /// @type Map
 /// @access public
-$spacing-properties:      (padding: 'p', margin: 'm') !default;
+$spacing-properties:   (padding: 'p', margin: 'm') !default;
 
 /// Map of spacing orientations and their shorthand codes
 /// @type Map
 /// @access public
-$spacing-orientations:    (block: 'b', inline: 'i') !default;
+$spacing-orientations: (block: 'b', inline: 'i') !default;
 
 /// List of spacing position values
 /// @type List
 /// @access public
-$spacing-positions:       (start, end) !default;
-
-/// List of spacing size options including 'none'
-/// @type List
-/// @access public
-$spacing-sizes:           list.append($spacing-labels, none) !default;
-
-@if (list.length($spacing-scale) != list.length($spacing-labels)) {
-  @error 'the `$spacing-labels` and `$spacing-scale` options must have the same length.'
-}
+$spacing-positions:    (start: 's', end: 'e') !default;

@@ -1,35 +1,37 @@
 @use 'sass:math';
-@use 'sass:list';
+@use 'sass:map';
 
-@use '../settings'           as settings;
-@use 'tools.important'       as *;
-@use 'tools.get-label-index' as *;
-@use 'tools.px2rem'          as *;
+@use '../settings'     as settings;
+@use 'tools.important' as *;
+@use 'tools.px2rem'    as *;
 
 
 /// Get a font size value (in rem or px) from the Font Size Scale.
 ///
-/// @param {String|Number} $labelOrPxValue - Font size label from the scale or pixel value
-/// @param {Boolean} $relative [true] - Convert to relative units (rem) or keep absolute units (px)
+/// @param {String|Number} $label-or-px-value - Font size label from the scale or pixel value
+/// @param {Boolean} $return-px [false] - Convert to relative units (rem) or keep absolute units (px)
 ///
-/// @return {Number} - Font size value in rem (if $relative is true) or px (if $relative is false)
+/// @return {Number} - Font size value in rem (if $return-px is false) or px (if $return-px is true)
 ///
 /// @example scss
 ///   .element {
-///     font-size: get-font-size(heading);     // Uses scale label
-///     font-size: get-font-size(16px);        // Uses pixel value
-///     font-size: get-font-size(heading, false); // Returns pixel value
+///     font-size: get-font-size(lg);       // Uses scale label
+///     font-size: get-font-size(16px);     // Uses pixel value
+///     font-size: get-font-size(lg, true); // Returns pixel value
 ///   }
-@function get-font-size($labelOrPxValue: default, $relative: true) {
-  $index: get-label-index(settings.$type-labels, $labelOrPxValue);
-  $absolute: $labelOrPxValue;
+@function get-font-size(
+  $label-or-px-value: settings.$default-type-size,
+  $return-px: false
+) {
+  $is-label:  map.has-key(settings.$type-sizes, $label-or-px-value);
+  $absolute: $label-or-px-value;
 
-  @if ($index != null) {
-    $multiplier: list.nth(settings.$type-scale, $index);
+  @if ($is-label) {
+    $multiplier: map.get(settings.$type-sizes, $label-or-px-value);
     $absolute: math.round($multiplier * settings.$global-font-size);
   }
 
-  @if ($relative == false) {
+  @if ($return-px) {
     @return $absolute;
   }
 

@@ -1,5 +1,6 @@
 @use 'sass:math';
 @use 'sass:meta';
+@use 'sass:map';
 
 @use '../settings'           as settings;
 @use 'tools.get-font-size'   as *;
@@ -10,38 +11,38 @@
 
 /// Sets font size and line height based on a label from the type scale or a pixel value.
 ///
-/// @param {String|Number} $labelOrPxValue [default] - Font size label from type scale or pixel value
+/// @param {String|Number} $label-or-px-value [default] - Font size label from type scale or pixel value
 /// @param {String|Number} $line-height [auto] - Line height value or 'auto' for calculated line height
 /// @param {Number} $modifier [0] - Modifier to adjust auto line height calculation
 /// @param {Boolean} $force [false] - Whether to add !important to declarations
 ///
 /// @example scss
 ///   .element {
-///     @include font-size(heading);                // Use scale label
-///     @include font-size(16px);                  // Use pixel value
-///     @include font-size(heading, 1.5);          // Custom line height
-///     @include font-size(heading, auto, 1);      // Modified auto line height
-///     @include font-size(heading, auto, 0, true); // Force with !important
+///     @include font-size(xl);                // Use scale label
+///     @include font-size(16px);              // Use pixel value
+///     @include font-size(xl, 1.5);           // Custom line height
+///     @include font-size(xl, auto, 1);       // Modified auto line height
+///     @include font-size(xl, auto, 0, true); // Force with !important
 ///   }
 @mixin font-size(
-  $labelOrPxValue: default,
+  $label-or-px-value: settings.$default-type-size,
   $line-height: auto,
   $modifier: 0,
   $force: false
 ) {
   $important: important($force);
-  $is-label:  get-label-index(settings.$type-labels, $labelOrPxValue) != null;
+  $is-label:  map.has-key(settings.$type-sizes, $label-or-px-value);
 
   @if ($is-label) {
-    font-size: var(--fs-#{ $labelOrPxValue }) $important;
+    font-size: var(--fs-#{ $label-or-px-value }) $important;
   } @else {
-    font-size: get-font-size($labelOrPxValue) $important;
+    font-size: get-font-size($label-or-px-value) $important;
   }
 
   @if ($line-height == 'auto' and $is-label) {
-    line-height: var(--lh-#{ $labelOrPxValue }) $important;
+    line-height: var(--lh-#{ $label-or-px-value }) $important;
   } @else if ($line-height == 'auto') {
-    line-height: get-line-height($labelOrPxValue, $modifier) $important;
+    line-height: get-line-height($label-or-px-value, $modifier) $important;
   } @else {
     line-height: $line-height $important;
   }

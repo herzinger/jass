@@ -1,13 +1,13 @@
 @use 'sass:selector';
-@use 'sass:list';
+@use 'sass:map';
 
 @use '../settings' as settings;
 @use '../tools'    as tools;
 
 
-@mixin _spacing-size($property, $label: default) {
-  #{ tools.if($label == default, '&', '&-#{ $label }') } {
-    #{ $property }: tools.if($label == none, 0, var(--spacing-#{ $label }));
+@mixin _spacing-size($property, $label: settings.$default-spacing-size) {
+  &-#{ $label } {
+    #{ $property }: tools.if($label == none, 0, var(--spc-#{ $label }));
   }
 }
 
@@ -17,15 +17,15 @@
 ///
 /// @example scss
 ///   // Generates classes like:
-///   .u-p { padding: var(--spacing-default); }
-///   .u-p-tiny { padding: var(--spacing-tiny); }
-///   .u-pb { padding-block: var(--spacing-default); }
-///   .u-pb-start { padding-block-start: var(--spacing-default); }
-///   .u-m-large { margin: var(--spacing-large); }
-///   .u-mi-end { margin-inline-end: var(--spacing-default); }
+///   .u-p { padding: var(--spc-default); }
+///   .u-p-tiny { padding: var(--spc-tiny); }
+///   .u-pb { padding-block: var(--spc-default); }
+///   .u-pb-start { padding-block-start: var(--spc-default); }
+///   .u-m-large { margin: var(--spc-large); }
+///   .u-mi-end { margin-inline-end: var(--spc-default); }
 @each $property, $property-label in settings.$spacing-properties {
 
-  @each $size in settings.$spacing-sizes {
+  @each $size in map.keys(settings.$spacing-sizes) {
     .u-#{ $property-label } {
       @include _spacing-size($property, $size);
 
@@ -33,8 +33,8 @@
         &#{ $orientation-label } {
           @include _spacing-size(#{ $property }-#{ $orientation }, $size);
 
-          @each $position in settings.$spacing-positions {
-            &-#{ $position } {
+          @each $position, $position-label in settings.$spacing-positions {
+            &#{ $position-label } {
               @include _spacing-size(#{ $property }-#{ $orientation }-#{ $position }, $size)
             }
           }

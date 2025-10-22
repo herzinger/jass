@@ -1,5 +1,8 @@
+@use 'sass:map';
+
 @use '../settings' as settings;
 @use '../tools'    as tools;
+
 
 :root {
   /// Set global font size and generate font-size (--fs-*) and line-height (--lh-*)
@@ -9,21 +12,21 @@
   /// @require {variable} settings.$global-font-size - Base font size
   /// @require {function} tools.get-font-size - Gets font size for a label
   /// @require {function} tools.get-line-height - Gets line height for a label
-  /// @require {list} settings.$type-labels - List of type scale labels
+  /// @require {list} settings.$type-size - map type sizes
   ///
   /// @example scss
   ///   // Generated CSS custom properties
   ///   :root {
-  ///     --fs-small: 0.875rem;
-  ///     --lh-small: 1.5;
-  ///     --fs-default: 1rem;
-  ///     --lh-default: 1.5;
+  ///     --fs-sm: 0.875rem;
+  ///     --lh-sm: 1.5;
+  ///     --fs-md: 1rem;
+  ///     --lh-md: 1.5;
   ///     // etc.
   ///   }
   --fs-global: #{ settings.$global-font-size };
 
-  @each $label in settings.$type-labels {
+  @each $label in map.keys(settings.$type-sizes) {
     --fs-#{ $label }: #{ tools.get-font-size($label) };
     --lh-#{ $label }: #{ tools.get-line-height($label) };
-    }
+  }
 }
