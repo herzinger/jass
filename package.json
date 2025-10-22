@@ -1,12 +1,15 @@
 {
-  "dependencies": {
-    "dart-sass": "^1.25.0",
-    "glob": "^10.4.2"
-  },
   "name": "sass-toolbox",
   "version": "0.0.1",
   "description": "modern toolbox for sass projects",
   "main": "index.scss",
   "author": "Henrique Erzinger <klaustrophobia@gmail.com>",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "sass ./example/style.scss ./example/style.css"
+  },
+  "devDependencies": {
+    "glob": "^10.4.2",
+    "sass": "^1.93.2"
+  }
 }
